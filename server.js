@@ -24,7 +24,7 @@ app.use(limiter);
 connectDB();
 
 app.use(cors({
-  origin: '*',
+  origin: 'https://twk56.netlify.app/',
   methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
