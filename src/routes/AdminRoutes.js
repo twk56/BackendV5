@@ -1,15 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { verifyToken, verifyAdmin } = require("../middleware/auth");
-const Booking = require("../models/Booking");
-
-const Room = require("../models/Room");
-const User = require("../models/User"); 
-
-router.post("/create", verifyToken, verifyAdmin, (req, res) => {
-  
-  res.send("สร้าง admin ใหม่สำเร็จ!");
-});
+const { verifyToken, verifyAdmin } = require("@middlewares/auth");
+const RoomAccess = require("@models/RoomAccess");
+const Room = require("@models/Room");
+const User = require("@models/User");
 
 
 router.get("/stats", async (req, res) => {

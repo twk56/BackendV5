@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 
 const { verifyToken } = require("../middleware/auth");
-const User = require("../models/User");
+const User = require("@models/User");
 
 const router = express.Router();
 

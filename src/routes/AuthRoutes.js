@@ -1,10 +1,12 @@
 const express = require("express");
+const router = express.Router();
+const AuthController = require("../controllers/AuthController");
+const { validateRegister } = require("@middlewares/validators/RegisterValidator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const User = require("@models/User");
 
-const router = express.Router();
-const User = require("../models/User");
-const { validateRegister } = require("../middleware/validation");
+
 
 router.post("/register", validateRegister, async (req, res) => {
   let { fullName, email, studentId, password } = req.body;

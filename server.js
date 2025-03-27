@@ -1,52 +1,36 @@
-require("dotenv").config();
+require("module-alias/register");
 const express = require("express");
-const cors = require("cors");
 const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
-const connectDB = require("./config/db");
-const authRoutes = require("./routes/auth");
-const profileRoutes = require("./routes/profile");
-const uploadRoutes = require("./routes/upload");
-const adminRoutes = require("./routes/admin");
-const path = require("path");
+const { connectDB, EnvConfig } = require("@config");
+const { adminRoutes, authRoutes, bookingRoutes } = require("@routes");
+const cors = require("cors");
+const profileRoutes = require("@routes/ProfileRoutes");
+const roomAccessRoutes = require("@routes/RoomAccessRoutes");
+
+
 const app = express();
-const bookingRoutes = require("./routes/bookings");
 
-const limiter = rateLimit({
-  windowMs: 1 * 60 * 1000, 
-  max: 100, 
-  standardHeaders: true,
-  legacyHeaders: false,
-});
+const corsOptions = {
+  origin: "*",
+  methods: ["GET", "POST", "PATCH", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
 
-app.use(limiter);
+app.use(cors(corsOptions));
+
+app.use(helmet());
+app.use(express.json());
 
 connectDB();
 
-app.use(cors({
-  origin: 'http://localhost:5173',
-  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-}));
-
-
-app.use(express.json());
-app.use(helmet());
-
-app.use("/api", bookingRoutes);
-app.use("/api", uploadRoutes);
 app.use("/api/admin", adminRoutes);
-
-app.use((req, res, next) => {
-  res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
-  next();
-});
-
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
 app.use("/api", authRoutes);
-app.use("/api", profileRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/profile", profileRoutes);
+app.use("/api/room-access", roomAccessRoutes);
 
-const PORT = process.env.PORT || 4999;
-app.listen(4999, () => console.log(`🚀 Server running on port ${PORT}`));
+
+app.listen(EnvConfig.PORT, () => {
+  console.log(`หลีกทางไอ้ไก่ ${EnvConfig.PORT}`);
+});

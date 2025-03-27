@@ -16,7 +16,7 @@ exports.verifyToken = (req, res, next) => {
     }
 
     req.user = { userId: decoded.userId, role: decoded.role };
-    console.log("Decoded Token:", decoded); 
+    console.log("Decoded Token:", decoded);
     next();
   } catch (error) {
     console.error("Error in verifyToken:", error.message);
