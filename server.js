@@ -24,6 +24,22 @@ app.use(express.json());
 
 connectDB();
 
+<<<<<<< HEAD
+=======
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}));
+
+
+app.use(express.json());
+app.use(helmet());
+
+app.use("/api", bookingRoutes);
+app.use("/api", uploadRoutes);
+>>>>>>> 1e27c31f7ac1a9d9c240619b847521054a40499a
 app.use("/api/admin", adminRoutes);
 app.use("/api", authRoutes);
 app.use("/api/bookings", bookingRoutes);
