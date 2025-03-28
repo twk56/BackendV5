@@ -4,7 +4,7 @@ const http = require("http");
 const https = require("https");
 const express = require("express");
 const helmet = require("helmet");
-const { connectDB, EnvConfig } = require("@config");
+const { EnvConfig } = require("@config");
 const { adminRoutes, authRoutes, bookingRoutes } = require("@routes");
 const cors = require("cors");
 const profileRoutes = require("@routes/ProfileRoutes");
@@ -12,6 +12,7 @@ const roomAccessRoutes = require("@routes/RoomAccessRoutes");
 const roomsRoutes = require("@routes/RoomsRoutes");
 const logger = require('./logger'); 
 const path = require("path");
+const connectDB = require("@config/DatabaseConnector");
 const app = express();
 
 const corsOptions = {
@@ -43,7 +44,7 @@ app.use("/api/room-access", roomAccessRoutes);
 app.use("/api/rooms", roomsRoutes);
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "cross-origin");
+  res.header("Access-Control-Allow-Origin", "*");
   next();
 });
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
