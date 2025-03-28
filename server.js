@@ -6,6 +6,8 @@ const { adminRoutes, authRoutes, bookingRoutes } = require("@routes");
 const cors = require("cors");
 const profileRoutes = require("@routes/ProfileRoutes");
 const roomAccessRoutes = require("@routes/RoomAccessRoutes");
+const roomsRoutes = require("@routes/RoomsRoutes");
+
 
 
 const app = express();
@@ -40,6 +42,7 @@ app.use("/api", authRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/room-access", roomAccessRoutes);
+app.use("/api/rooms", roomsRoutes);
 
 
 app.listen(EnvConfig.PORT, () => {

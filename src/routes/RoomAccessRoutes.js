@@ -7,10 +7,21 @@ const mongoose = require("mongoose");
 const dayjs = require('dayjs');
 const utc = require('dayjs/plugin/utc');
 const timezone = require('dayjs/plugin/timezone');
+const Room = require('@models/Room');
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.tz.setDefault('Asia/Bangkok');
+
+router.get('/', async (req, res) => {
+  try {
+    const rooms = await Room.find();
+    res.status(200).json(rooms);
+  } catch (error) {
+    console.error('Error fetching rooms:', error);
+    res.status(500).json({ message: 'เกิดข้อผิดพลาดในการดึงข้อมูลห้อง' });
+  }
+});
 
 router.post('/bookings', verifyToken, async (req, res) => {
   try {
@@ -140,5 +151,8 @@ router.get('/booking_logs', verifyToken, async (req, res) => {
     res.status(500).json({ message: 'เกิดข้อผิดพลาด', error: error.message });
   }
 });
+
+
+
 
 module.exports = router;
