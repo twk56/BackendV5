@@ -35,8 +35,6 @@ app.use(express.json());
 app.use(helmet());
 
 app.use("/api", bookingRoutes);
-app.use("/api", uploadRoutes);
-
 app.use("/api/admin", adminRoutes);
 app.use("/api", authRoutes);
 app.use("/api/bookings", bookingRoutes);
