@@ -30,7 +30,7 @@ router.post("/upload", upload.single("image"), (req, res) => {
     return res.status(400).json({ error: "กรุณาเลือกไฟล์" });
   }
   
-  const imageUrl = `${process.env.BASE_URL || "http://localhost:5001"}/uploads/${req.file.filename}`;
+  const imageUrl = `${process.env.BASE_URL || "https://localhost"}/uploads/${req.file.filename}`;
   res.json({ imageUrl });
 });
 
