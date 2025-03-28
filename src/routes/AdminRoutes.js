@@ -1,22 +1,13 @@
 const express = require("express");
 const router = express.Router();
-<<<<<<< HEAD:src/routes/AdminRoutes.js
 const { verifyToken, verifyAdmin } = require("@middlewares/auth");
 const RoomAccess = require("@models/RoomAccess");
 const Room = require("@models/Room");
 const User = require("@models/User");
-=======
 const { verifyToken, verifyAdmin } = require("../middleware/auth");
 const Booking = require("../models/Booking");
-
 const Room = require("../models/Room");
 const User = require("../models/User");
-
-// router.post("/create", verifyToken, verifyAdmin, (req, res) => {
-router.post("/create", verifyToken, verifyAdmin, (req, res) => {
-  res.send("สร้าง admin ใหม่สำเร็จ!");
-});
->>>>>>> 1e27c31f7ac1a9d9c240619b847521054a40499a:routes/admin.js
 
 
 router.get("/stats", async (req, res) => {
